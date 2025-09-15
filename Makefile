@@ -103,9 +103,9 @@ install-docker: sanity-check ## Install docker
 	[ ! -f /.dockerenv ] && sudo systemctl enable --now docker
 	make clean
 
-install-gui: sanity-check ## Install gui, i3, polybar, kitty, rofi, picom
+install-gui: sanity-check ## Install gui, i3, polybar, kitty, wezterm, rofi, picom
 	[ ! -f /etc/machine-id ] && sudo systemd-machine-id-setup
-	yes|sudo pacman -S --noconfirm --needed i3-gaps i3blocks i3lock i3lock-fancy-git i3status dmenu feh rofi nm-connection-editor picom polybar kitty brightnessctl xorg-xhost
+	yes|sudo pacman -S --noconfirm --needed i3-gaps i3blocks i3lock i3lock-fancy-git i3status dmenu feh rofi nm-connection-editor picom polybar kitty wezterm brightnessctl xorg-xhost
 	yay --noconfirm --needed -S rofi-power-menu i3-battery-popup-git
 	gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
@@ -139,6 +139,11 @@ install-gui: sanity-check ## Install gui, i3, polybar, kitty, rofi, picom
 	[ ! -d ~/.config/wezterm ] && mkdir -p ~/.config/wezterm
 	[ -f ~/.config/wezterm/wezterm.lua ] && [ ! -L ~/.config/wezterm/wezterm.lua ] && mv ~/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua.skabak
 	ln -sf /opt/skillarch/config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
+	
+	# yazi config
+	[ ! -d ~/.config/yazi ] && mkdir -p ~/.config/yazi
+	[ -f ~/.config/yazi/keymap.toml ] && [ ! -L ~/.config/yazi/keymap.toml ] && mv ~/.config/yazi/keymap.toml ~/.config/yazi/keymap.toml.skabak
+	ln -sf /opt/skillarch/config/yazi/keymap.toml ~/.config/yazi/keymap.toml
 
 	# touchpad config
 	[ ! -d /etc/X11/xorg.conf.d ] && sudo mkdir -p /etc/X11/xorg.conf.d
