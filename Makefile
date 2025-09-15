@@ -134,6 +134,11 @@ install-gui: sanity-check ## Install gui, i3, polybar, kitty, rofi, picom
 	[ ! -d ~/.config/kitty ] && mkdir -p ~/.config/kitty
 	[ -f ~/.config/kitty/kitty.conf ] && [ ! -L ~/.config/kitty/kitty.conf ] && mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf.skabak
 	ln -sf /opt/skillarch/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
+	
+	# wezterm config
+	[ ! -d ~/.config/wezterm ] && mkdir -p ~/.config/wezterm
+	[ -f ~/.config/wezterm/wezterm.lua ] && [ ! -L ~/.config/wezterm/wezterm.lua ] && mv ~/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua.skabak
+	ln -sf /opt/skillarch/config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 
 	# touchpad config
 	[ ! -d /etc/X11/xorg.conf.d ] && sudo mkdir -p /etc/X11/xorg.conf.d
