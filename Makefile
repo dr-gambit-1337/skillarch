@@ -103,9 +103,9 @@ install-docker: sanity-check ## Install docker
 	[ ! -f /.dockerenv ] && sudo systemctl enable --now docker
 	make clean
 
-install-gui: sanity-check ## Install gui, i3, polybar, kitty, wezterm, rofi, picom
+install-gui: sanity-check ## Install gui, i3, polybar, kitty, rofi, picom
 	[ ! -f /etc/machine-id ] && sudo systemd-machine-id-setup
-	yes|sudo pacman -S --noconfirm --needed i3-gaps i3blocks i3lock i3lock-fancy-git i3status dmenu feh rofi nm-connection-editor picom polybar kitty wezterm brightnessctl xorg-xhost
+	yes|sudo pacman -S --noconfirm --needed i3-gaps i3blocks i3lock i3lock-fancy-git i3status dmenu feh rofi nm-connection-editor picom polybar kitty brightnessctl xorg-xhost
 	yay --noconfirm --needed -S rofi-power-menu i3-battery-popup-git
 	gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
@@ -129,16 +129,16 @@ install-gui: sanity-check ## Install gui, i3, polybar, kitty, wezterm, rofi, pic
 	# picom config
 	[ -f ~/.config/picom.conf ] && [ ! -L ~/.config/picom.conf ] && mv ~/.config/picom.conf ~/.config/picom.conf.skabak
 	ln -sf /opt/skillarch/config/picom.conf ~/.config/picom.conf
+	#
+            # wezterm config
+	# [ ! -d ~/.config/wezterm ] && mkdir -p ~/.config/wezterm
+	# [ -f ~/.config/wezterm/wezterm.lua ] && [ ! -L ~/.config/wezterm/wezterm.lua ] && mv ~/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua.skabak
+	# ln -sf /opt/skillarch/config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 
 	# kitty config
 	[ ! -d ~/.config/kitty ] && mkdir -p ~/.config/kitty
 	[ -f ~/.config/kitty/kitty.conf ] && [ ! -L ~/.config/kitty/kitty.conf ] && mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf.skabak
 	ln -sf /opt/skillarch/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
-	
-	# wezterm config
-	[ ! -d ~/.config/wezterm ] && mkdir -p ~/.config/wezterm
-	[ -f ~/.config/wezterm/wezterm.lua ] && [ ! -L ~/.config/wezterm/wezterm.lua ] && mv ~/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua.skabak
-	ln -sf /opt/skillarch/config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 	
 	# yazi config
 	[ ! -d ~/.config/yazi ] && mkdir -p ~/.config/yazi
